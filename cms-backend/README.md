@@ -1,5 +1,5 @@
 # This was the default Strapi Readme
-## I has been containerized with Docker compose, npm run develop is the final command of Dockerfile
+### I has been containerized with Docker compose, npm run develop is the final command of Dockerfile
 ### See official Strapi docks on Docker compose https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/installation/docker.html
 
 # 🚀 Getting started with Strapi
