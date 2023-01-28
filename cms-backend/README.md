@@ -1,3 +1,7 @@
+# This was the default Strapi Readme
+## I has been containerized with Docker compose, npm run develop is the final command of Dockerfile
+### See official Strapi docks on Docker compose https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/installation/docker.html
+
 # 🚀 Getting started with Strapi
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html) (CLI) which lets you scaffold and manage your project in seconds.
