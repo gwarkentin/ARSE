@@ -22,8 +22,11 @@ Bringing Augmented Reaily to the in-store retail shopping customer by:
 |Kyoung Shin|kshin@fullerton.edu|Facult Advisor|
 
 
-OG project proposal https://docs.google.com/document/d/1ymVpFoOa4kiZiPLeYzr8D4v9uAraJV2a/edit
-OG Figma https://www.figma.com/file/IDqGP9aFZh96hn4aBDPlYw/ARSE?node-id=0%3A1
-OG MVC Diagrams https://www.figma.com/file/tTalioEOerrUKONsOqVvZb/MVC-diagrams?node-id=0%3A1
-OG ER Diagram https://drive.google.com/file/d/10t0ddIY4shKA0vqz_KIaGjMBXYv3XDTA/view?usp=sharing
-OG Presentation https://docs.google.com/presentation/d/1eBH6lk8a8x217TbqJqsdIyuBRqpoUvCSSTcwSpV7KQM/edit?usp=sharing
+### Links
+|Name|Url|
+|---|---|
+|OG project proposal|https://docs.google.com/document/d/1ymVpFoOa4kiZiPLeYzr8D4v9uAraJV2a/edit|
+|OG Figma Mockup|https://www.figma.com/file/IDqGP9aFZh96hn4aBDPlYw/ARSE?node-id=0%3A1|
+|OG MVC Diagrams|https://www.figma.com/file/tTalioEOerrUKONsOqVvZb/MVC-diagrams?node-id=0%3A1|
+|OG ER Diagram|https://drive.google.com/file/d/10t0ddIY4shKA0vqz_KIaGjMBXYv3XDTA/view?usp=sharing|
+|OG Presentation|https://docs.google.com/presentation/d/1eBH6lk8a8x217TbqJqsdIyuBRqpoUvCSSTcwSpV7KQM/edit?usp=sharing|
