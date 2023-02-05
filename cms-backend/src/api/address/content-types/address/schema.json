@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "addresses",
+  "info": {
+    "singularName": "address",
+    "pluralName": "addresses",
+    "displayName": "address",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "street_addr_1": {
+      "type": "string"
+    },
+    "street_addr_2": {
+      "type": "string"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::state.state"
+    },
+    "zipcode": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::zipcode.zipcode"
+    }
+  }
+}

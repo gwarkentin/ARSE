@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "zipcodes",
+  "info": {
+    "singularName": "zipcode",
+    "pluralName": "zipcodes",
+    "displayName": "Zipcode",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "zip": {
+      "type": "string",
+      "maxLength": 10,
+      "unique": true,
+      "required": true
+    }
+  }
+}
