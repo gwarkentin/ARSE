@@ -18,4 +18,4 @@ RUN npm install
 
 COPY . .
 
-ENTRYPOINT ["./develop.sh"]
+ENTRYPOINT ["/bin/sh", "./develop.sh"]
