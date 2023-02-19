@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "postal_codes",
+  "info": {
+    "singularName": "postal-code",
+    "pluralName": "postal-codes",
+    "displayName": "PostalCode",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "code": {
+      "type": "string",
+      "regex": "\\d{5}([ \\-]\\d{4})?",
+      "required": true,
+      "unique": true
+    }
+  }
+}

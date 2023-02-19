@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "addresses",
+  "info": {
+    "singularName": "address",
+    "pluralName": "addresses",
+    "displayName": "Address",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Street1": {
+      "type": "string",
+      "required": false,
+      "private": true
+    },
+    "Street2": {
+      "type": "string",
+      "private": true
+    },
+    "City": {
+      "type": "string"
+    },
+    "State": {
+      "type": "string",
+      "minLength": 2
+    },
+    "postal_code": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::postal-code.postal-code"
+    },
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    }
+  }
+}
