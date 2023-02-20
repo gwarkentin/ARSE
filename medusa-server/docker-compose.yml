@@ -1,0 +1,43 @@
+version: "3.8"
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: backend:starter
+    container_name: medusa-server-default
+    depends_on:
+  #    - postgres-arse
+      - redis-arse
+    environment:
+      DATABASE_URL: ${DATABASE_URL} 
+      REDIS_URL: redis://redis-arse
+      NODE_ENV: development
+      JWT_SECRET: ${JWT_SECRET} 
+      COOKIE_SECRET: ${COOKIE_SECRET} 
+      PORT: 9000
+    ports:
+      - "9000:9000"
+    volumes:
+      - .:/app/medusa
+      - node_modules:/app/medusa/node_modules
+
+
+  # postgres-arse:
+  #   image: postgres:10.4
+  #   ports:
+  #     - "5432:5432"
+  #   environment:
+  #     POSTGRES_USER: ${POSTGRES_USER}
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} 
+  #     POSTGRES_DB: ${POSTGRES_DB}
+  #   volumes:
+  #     - /var/lib/postgresql/data:/var/lib/postgresql
+
+  redis-arse:
+    image: redis
+    expose:
+      - 6379
+
+volumes:
+  node_modules:

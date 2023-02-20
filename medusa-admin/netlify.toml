@@ -1,0 +1,5 @@
+[template.environment]
+  MEDUSA_BACKEND_URL="https://howards2.com"
+
+[build]
+  publish = "public/"
