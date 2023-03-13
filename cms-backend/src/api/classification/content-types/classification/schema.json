@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "classifications",
+  "info": {
+    "singularName": "classification",
+    "pluralName": "classifications",
+    "displayName": "Classification"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category",
+      "mappedBy": "classification"
+    }
+  }
+}
