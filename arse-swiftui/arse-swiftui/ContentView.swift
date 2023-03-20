@@ -38,13 +38,13 @@
 
 // yeah just leave the stuff above ig
 
-let API_KEY = "05f1aaa4009ce4e3d030f68a16dd74bf7562bca1014a0e26f05bd5eba8ed85feaf65ef0080df58d9cc54cbaf57f273a69808e10d523b61ee423d9499f3ecf162c14102ec8cf017f631a8cbd63055e2e607794770b23fb6238aad09290526686e183522282abafb9e8ade2383f29b29b5674f6b242c474eccf34a3cde434a1b86"
+let API_KEY = "dbfec22f11fe4f30964d531c325f0c279782e7fdee83894e8f746e7b89f4b2aca4c1f912c42707057e93a9e3d0a5b9fd694d32e2e6c328ac071072f187358b0046b857d6e48e3dd9f092cfab2d162cdb6525fab7cbeac07c40d9947fcf225ddc36e2c2b952e464cec1affc8cd9c7703833c2ebfed23ac5306b37878cc890f018"
 
 import SwiftUI
 
 struct ProductBrand: Hashable, Codable {
     let name: String
-    let hero_blurb: String
+    let hero_blurb: String?
 }
 
 struct ProductBrandContainer: Hashable, Codable {
@@ -179,11 +179,13 @@ struct ContentView: View {
                                 Text(product.attributes.group.data.attributes.name)
                             }
                             //replace with "For feature in features"
+                            /*
                             HStack{
                                 Text("Feature: ")
                                 Text(product.attributes.features.data[0].attributes.name)
                             }
-                        }, label: {Text("Label")})
+                             */
+                        }, label: {Text("")})
                 }
             }
             .navigationBarTitle("Products")
