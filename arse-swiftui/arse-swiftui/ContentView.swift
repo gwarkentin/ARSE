@@ -153,11 +153,28 @@ class FetchModel: ObservableObject {
     }
 }
 
+//struct SwapperView: View {
+//
+//    @State var enableARMode = false
+//    
+//    var body: some View{
+//        return Group {
+//            if enableARMode {
+//                ARView()
+//            }
+//            else {
+//                ContentView(enableARMode: $enableARMode)
+//            }
+//        }
+//    }
+//}
 
 struct ContentView: View {
     @StateObject var fetchModel = FetchModel(urlLink:
         "http://localhost:1337/api/products/?populate=*&pagination[page]=1&pagination[pageSize]=10"
     )
+    
+    //@Binding var enableARMode : Bool
     
     var body: some View {
         NavigationView {
@@ -189,12 +206,52 @@ struct ContentView: View {
                 }
             }
             .navigationBarTitle("Products")
+            .toolbar{
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink("AR Mode") {
+                        ARCameraView()
+                    }
+                    
+                }
+            }
             .onAppear {
                 fetchModel.fetchData()
             }
         }
         
+        
     }
+}
+
+import ARKit
+import RealityKit
+
+struct ARCameraView : UIViewRepresentable {
+    func updateUIView(_ uiView: UIViewType, context: Context) {
+    }
+    
+    func makeUIView(context: Context) -> some UIView {
+        
+        let view = ARView()
+        
+        let session = view.session
+        let config = ARWorldTrackingConfiguration()
+        config.planeDetection = [.horizontal]
+        session.run(config)
+        
+        let coachingOverlay = ARCoachingOverlayView()
+        coachingOverlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        coachingOverlay.session = session
+        coachingOverlay.goal = .horizontalPlane
+        view.addSubview(coachingOverlay)
+        
+        #if DEBUG
+        view.debugOptions = [.showFeaturePoints, .showAnchorOrigins, .showAnchorGeometry]
+        #endif
+        
+        return view
+    }
+    
 }
 
 // TODO: FIX THIS SHIT LATER
@@ -221,7 +278,10 @@ struct ContentView: View {
 
 
 struct ContentView_Previews: PreviewProvider {
+    
+    
     static var previews: some View {
         ContentView()
     }
 }
+
