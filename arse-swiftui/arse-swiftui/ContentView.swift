@@ -94,18 +94,28 @@ struct ProductDimension: Hashable, Codable {
     let unit_weight: String
 }
 
+struct ProductImageAttributes: Hashable, Codable {
+    let url: String?
+}
+
+struct ProductImageData: Hashable, Codable {
+    let id: Int
+    let attributes: ProductImageAttributes?
+}
+
 struct ProductImage: Hashable, Codable {
-    let url: String
+    let data: [ProductImageData]?
 }
 
 struct ProductAttributes: Hashable, Codable {
     let sku: String
-    let description: String
-    let long_description: String
-    let brand: ProductBrandData
-    let group: ProductGroupData
-    let features: ProductFeaturesData
-//    let images: [ProductImage]
+    // Uncomment attributes and make sure they work
+//    let description: String
+//    let long_description: String
+//    let brand: ProductBrandData
+//    let group: ProductGroupData
+//    let features: ProductFeaturesData
+    let images: ProductImage?
 }
 
 struct Product: Hashable, Codable {
@@ -118,17 +128,21 @@ struct ProductListData: Codable {
 }
 
 
-class FetchModel: ObservableObject {
+class FetchProductListModel: ObservableObject {
     @Published var products = [Product]()
     
-    var urlLink: String
+    var productListURL: String
     
-    init(urlLink: String) {
-        self.urlLink = urlLink
+    var baseURL: String
+    
+    init(productListURL: String, baseURL: String) {
+        self.productListURL = productListURL
+        self.baseURL = baseURL
     }
     
+    
     func fetchData() {
-        guard let url = URL(string: urlLink) else {
+        guard let url = URL(string: baseURL + productListURL) else {
             return
         }
         var request = URLRequest(url: url)
@@ -156,7 +170,7 @@ class FetchModel: ObservableObject {
 //struct SwapperView: View {
 //
 //    @State var enableARMode = false
-//    
+//
 //    var body: some View{
 //        return Group {
 //            if enableARMode {
@@ -170,30 +184,43 @@ class FetchModel: ObservableObject {
 //}
 
 struct ContentView: View {
-    @StateObject var fetchModel = FetchModel(urlLink:
-        "http://localhost:1337/api/products/?populate=*&pagination[page]=1&pagination[pageSize]=10"
+    @StateObject var productListModel = FetchProductListModel(productListURL:
+                                                "/api/products/?populate=*&pagination[page]=1&pagination[pageSize]=10", baseURL: "http://localhost:1337"
     )
+    
+    func ConcatURL(listOfStrings: [String]) -> URL {
+        var s: String = ""
+        for str in listOfStrings {
+            s += str
+        }
+        return URL(string: s)!
+    }
+    
+    func GimmyFirstImage(product: Product) -> String {
+        
+        guard
+            let imageURL = product.attributes.images?.data?[0].attributes?.url as? String
+        else { return "/uploads/image_processing20200516_26875_cx3ies_705a5e16b1.png" }
+        
+        return imageURL
+        
+        
+    }
     
     //@Binding var enableARMode : Bool
     
     var body: some View {
         NavigationView {
-            List(fetchModel.products, id: \.self) { product in
+            List(productListModel.products, id: \.self) { product in
                 HStack{
-                    HStack{
-                        Text(String(product.attributes.sku))
-                            .font(.headline)
-                        Text(String(product.attributes.description))
-                    }
                     NavigationLink(
                         destination: VStack{
                             HStack{
-                                Text(String(product.attributes.brand.data.attributes.name))
-                                Text(product.attributes.sku)
+                                //Display SKU
                             }
                             HStack{
                                 Text("Group: ")
-                                Text(product.attributes.group.data.attributes.name)
+                                // Text(product.attributes.group.data.attributes.name)
                             }
                             //replace with "For feature in features"
                             /*
@@ -202,7 +229,25 @@ struct ContentView: View {
                                 Text(product.attributes.features.data[0].attributes.name)
                             }
                              */
-                        }, label: {Text("")})
+                        }, label: {VStack{
+                            
+                            AsyncImage(url: ConcatURL(listOfStrings: [productListModel.baseURL, GimmyFirstImage(product: product)]))
+                            { phase in
+                                switch phase {
+                                case .success(let image):
+                                    image.resizable().aspectRatio(contentMode: .fit)
+                                case .failure(let error):
+                                    Text("Failed to Load: ").foregroundColor(.red)
+                                case .empty:
+                                    Text("loading......")
+                                @unknown default:
+                                    Text("loading...")
+                                }
+                            }
+                                       Text(String(product.attributes.sku))
+                                .font(.headline)
+    //                        Text(String(product.attributes.description))
+                        }})
                 }
             }
             .navigationBarTitle("Products")
@@ -215,7 +260,7 @@ struct ContentView: View {
                 }
             }
             .onAppear {
-                fetchModel.fetchData()
+                productListModel.fetchData()
             }
         }
         
@@ -254,31 +299,7 @@ struct ARCameraView : UIViewRepresentable {
     
 }
 
-// TODO: FIX THIS SHIT LATER
-
-//struct PreviewItemView: View {
-//    var newUrlLink: String
-//    @StateObject var fetchModel: FetchModel
-//
-//    init(newUrlLink: String, fetchModel: FetchModel) {
-//        self.newUrlLink = newUrlLink
-//        self.fetchModel = FetchModel(urlLink: newUrlLink)
-//    }
-//
-//    var body: some View {
-//        List(fetchModel.pokemon, id: \.self) { pokemon in
-//            VStack{
-//                Text(pokemon.name)
-//                Text(pokemon.weight)
-//            }
-//
-//        }
-//    }
-//}
-
-
 struct ContentView_Previews: PreviewProvider {
-    
     
     static var previews: some View {
         ContentView()
